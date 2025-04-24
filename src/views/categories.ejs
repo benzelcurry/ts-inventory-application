@@ -1,0 +1,19 @@
+<%- include('partials/header', { title: "All Categories", heading: "Inventory Categories" }) %>
+
+<body>
+  <h1>Categories</h1>
+  <ul>
+    <% categories.forEach(category => { %>
+      <li>
+        <h3><%= category.category %></h3>
+        <ul class="category-members">
+          <% items.forEach(item => { %>
+            <% if (item.category_id == category.id) { %>
+              <li><%= item.item %></li>
+            <% } %>
+          <% }) %>
+        </ul>
+      </li>
+    <% }) %>
+  </ul>
+</body>

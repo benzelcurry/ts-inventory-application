@@ -1,14 +1,15 @@
 import pool from "./pool";
 
-import { Item } from "../types/inventory.types";
+import { Item, Category } from "../types/inventory.types";
 
+// Fetch all items
 export async function getAllItems(): Promise<Item[]> {
-  try {
-    const { rows } = await pool.query("SELECT * FROM items");
-    return rows as Item[];
-  } catch (err) {
-    console.log("error occurred in queries.ts");
-    console.error(err);
-    throw err;
-  }
+  const { rows } = await pool.query("SELECT * FROM items");
+  return rows as Item[];
+}
+
+// Fetch all categories
+export async function getAllCategories(): Promise<Category[]> {
+  const { rows } = await pool.query("SELECT * FROM categories");
+  return rows as Category[];
 }

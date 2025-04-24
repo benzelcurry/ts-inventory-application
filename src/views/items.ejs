@@ -5,9 +5,20 @@
   <ul>
     <% items.forEach(item => { %>
       <li>
-        <strong><%= item.item %></strong>
-        <% if (item.category) { %>
-          <div class="category">Category: <%= item.category %></div>
+        <strong><%= item.item %> | </strong>
+        <% if (item.category_id) { %>
+          <span class="category">
+            Category: 
+            <% if (item.category_id === 1) { %>
+              🗡️ Weapons
+            <% } else if (item.category_id === 2) { %>
+              🛡️ Armor
+            <% } else if (item.category_id === 3) { %>
+              🔥 Summons
+            <% } else { %>
+              ❓ Unknown
+            <% } %>
+          </span>
         <% } %>
       </li>
     <% }) %>
