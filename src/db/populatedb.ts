@@ -53,7 +53,7 @@ async function main() {
   console.log("seeding database . . .");
 
   const client = new Client({
-    connectionString: `postgresql://${process.env.DB_USER}:${process.env.DB_PW}@localhost:5432/inventory_application`,
+    connectionString: `postgresql://${process.env.DB_USER}:${process.env.DB_PW}@localhost:5432/${process.env.NAME}`,
   });
 
   try {
