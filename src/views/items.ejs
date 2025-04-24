@@ -1,0 +1,15 @@
+<%- include('partials/header', { title: "All Items", heading: "Inventory Items" }) %>
+
+<body>
+  <h1>Items</h1>
+  <ul>
+    <% items.forEach(item => { %>
+      <li>
+        <strong><%= item.item %></strong>
+        <% if (item.category) { %>
+          <div class="category">Category: <%= item.category %></div>
+        <% } %>
+      </li>
+    <% }) %>
+  </ul>
+</body>

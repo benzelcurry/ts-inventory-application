@@ -8,7 +8,8 @@ const itemRouter = Router();
 itemRouter.get("/items", async (req: Request, res: Response) => {
   try {
     const items = await getItems();
-    res.status(200).json(items);
+    res.render("items", { items });
+    // res.status(200).json(items);
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
