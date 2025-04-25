@@ -23,4 +23,20 @@
       </li>
     <% }) %>
   </ul>
+
+  <form action="/items" method="POST">
+    <p style="font-weight: bold;">Add an item</p>
+    <label for="item">Item Name: </label>
+    <input type="text" name="item" id="item">
+
+    <label for="category">Category ID: </label>
+    <select name="category">
+      <% categories.forEach(category => { %>
+        <option value="<%= category.id %>">
+          <%= category.id %> - <%= category.category %>
+        </option>
+      <% }) %>
+    </select>
+    <button type="submit">Add Item</button>
+  </form>
 </body>
