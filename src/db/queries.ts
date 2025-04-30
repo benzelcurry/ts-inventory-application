@@ -22,6 +22,18 @@ export async function createItem(
   ]);
 }
 
+// Update an item
+export async function updateItem(
+  name: string,
+  category_id: string,
+  id: string
+): Promise<void> {
+  await pool.query(
+    "UPDATE items SET item = ($1), category_id = ($2) WHERE id = ($3)",
+    [name, category_id, id]
+  );
+}
+
 // CATEGORIES
 // -----------------------------------------------
 
