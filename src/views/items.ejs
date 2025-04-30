@@ -5,7 +5,7 @@
   <ul>
     <% items.forEach(item => { %>
       <li>
-        <strong><%= item.item %> | </strong>
+        <strong>Item ID: <%= item.id %> |</strong> <%= item.item %> | 
         <% if (item.category_id) { %>
           <span class="category">
             Category: 
@@ -24,13 +24,32 @@
     <% }) %>
   </ul>
 
+  <form action="/items/update" method="POST">
+    <p style="font-weight: bold;">Modify an item</p>
+    <label for="id">ID of Item to Modify: </label>
+    <input type="text" name="id" id="item" required>
+
+    <label for="item">New Item Name: </label>
+    <input type="text" name="item" id="item" required>
+
+    <label for="category">Category ID: </label>
+    <select name="category" required>
+      <% categories.forEach(category => { %>
+        <option value="<%= category.id %>">
+          <%= category.id %> - <%= category.category %>
+        </option>
+      <% }) %>
+    </select>
+    <button type="submit">Add Item</button>
+  </form>
+
   <form action="/items" method="POST">
     <p style="font-weight: bold;">Add an item</p>
     <label for="item">Item Name: </label>
-    <input type="text" name="item" id="item">
+    <input type="text" name="item" id="item" required>
 
     <label for="category">Category ID: </label>
-    <select name="category">
+    <select name="category" required>
       <% categories.forEach(category => { %>
         <option value="<%= category.id %>">
           <%= category.id %> - <%= category.category %>
