@@ -5,7 +5,7 @@
   <ul>
     <% categories.forEach(category => { %>
       <li>
-        <h3><%= category.category %></h3>
+        <h3><%= category.category %> | Category ID: <%= category.id %></h3>
         <ul class="category-members">
           <% const categoryItems = items.filter(item => item.category_id === category.id) %>
           <% if (categoryItems.length === 0) { %>
@@ -30,6 +30,18 @@
       </li>
     <% }) %>
   </ul>
+
+  <form action="/categories/update" method="POST">
+    <p style="font-weight: bold;">Update a Category</p>
+
+    <label for="id">Category ID: </label>
+    <input type="text" name="id" id="id" required>   
+
+    <label for="category">Category Name: </label>
+    <input type="text" name="category" id="category" required>
+
+    <button type="submit">Update Category</button>
+  </form>
 
   <form action="/categories" method="POST">
     <p style="font-weight: bold;">Add a Category</p>

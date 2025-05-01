@@ -48,6 +48,17 @@ export async function createCategory(category: string): Promise<void> {
   await pool.query("INSERT INTO categories (category) VALUES ($1)", [category]);
 }
 
+// Update a category
+export async function updateCategory(
+  category: string,
+  id: string
+): Promise<void> {
+  await pool.query("UPDATE categories SET category = ($1) WHERE id = ($2)", [
+    category,
+    id,
+  ]);
+}
+
 // Delete a category
 export async function deleteCategory(id: string): Promise<void> {
   await pool.query("DELETE FROM categories WHERE id = ($1)", [id]);

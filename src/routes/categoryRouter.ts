@@ -4,6 +4,7 @@ import { getItems } from "../controllers/itemController";
 import {
   addCategory,
   getCategories,
+  modifyCategory,
   removeCategory,
 } from "../controllers/categoryController";
 
@@ -33,6 +34,20 @@ categoryRouter.post(
         await removeCategory(req.body.id);
         res.status(200).json("Category Successfully Deleted");
       }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json("Internal Server Error");
+    }
+  }
+);
+
+// Updates a category
+categoryRouter.post(
+  "/categories/update",
+  async (req: Request, res: Response) => {
+    try {
+      await modifyCategory(req.body.category, req.body.id);
+      res.status(200).json("Category Modified Successfully");
     } catch (err) {
       console.error(err);
       res.status(500).json("Internal Server Error");
