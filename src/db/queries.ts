@@ -34,6 +34,11 @@ export async function updateItem(
   );
 }
 
+// Delete an item
+export async function deleteItem(id: string): Promise<void> {
+  await pool.query("DELETE FROM items WHERE id = ($1)", [id]);
+}
+
 // CATEGORIES
 // -----------------------------------------------
 

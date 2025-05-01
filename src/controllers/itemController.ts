@@ -1,4 +1,4 @@
-import { getAllItems, createItem, updateItem } from "../db/queries";
+import { getAllItems, createItem, updateItem, deleteItem } from "../db/queries";
 import { Item } from "../types/inventory.types";
 
 export async function getItems(): Promise<Item[]> {
@@ -18,4 +18,8 @@ export async function modifyItem(
   id: string
 ): Promise<void> {
   return await updateItem(item, category_id, id);
+}
+
+export async function removeItem(id: string): Promise<void> {
+  return await deleteItem(id);
 }

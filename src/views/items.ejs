@@ -16,9 +16,18 @@
             <% } else if (item.category_id === 3) { %>
               🔥 Summons
             <% } else { %>
-              ❓ Unknown
+              <% const category = categories.find(category => category.id === item.category_id) %>
+              ❓ <%= category.category %>
             <% } %>
           </span>
+          <form action="/items/delete" method="POST">
+            <input type="hidden" name="id" id="id" value="<%= item.id %>">
+
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password">
+
+            <button type="submit">Delete Item</button>
+          </form>
         <% } %>
       </li>
     <% }) %>

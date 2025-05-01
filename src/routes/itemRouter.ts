@@ -1,6 +1,11 @@
 import { Router, Request, Response } from "express";
 
-import { getItems, addItem, modifyItem } from "../controllers/itemController";
+import {
+  getItems,
+  addItem,
+  modifyItem,
+  removeItem,
+} from "../controllers/itemController";
 import { getCategories } from "../controllers/categoryController";
 
 const itemRouter = Router();
@@ -24,6 +29,22 @@ itemRouter.post("/items/update", async (req: Request, res: Response) => {
   try {
     await modifyItem(req.body.item, req.body.category, req.body.id);
     res.status(200).json("Item modified successfully.");
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Deletes an item from the items table
+itemRouter.post("/items/delete", async (req: Request, res: Response) => {
+  try {
+    if (req.body.password != "ADMINDELETE") {
+      res.status(400).json("Invalid password");
+    } else {
+      console.log("made it here");
+      await removeItem(req.body.id);
+      res.status(200).json("Item deleted successfully.");
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Internal Server Error" });
