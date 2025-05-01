@@ -7,13 +7,25 @@
       <li>
         <h3><%= category.category %></h3>
         <ul class="category-members">
-          <% items.forEach(item => { %>
-            <% if (item.category_id == category.id) { %>
+          <% const categoryItems = items.filter(item => item.category_id === category.id) %>
+          <% if (categoryItems.length === 0) { %>
+            <li>No items present in category.</li>
+            
+          <% } else { %> 
+            <% categoryItems.forEach(item => { %>
               <li><%= item.item %></li>
-            <% } %>
-          <% }) %>
+            <% }) %>
+          <% } %>
         </ul>
       </li>
     <% }) %>
   </ul>
+
+  <form action="/categories" method="POST">
+    <p style="font-weight: bold;">Add a Category</p>
+    <label for="category">Category Name: </label>
+    <input type="text" name="category" id="category" required>
+
+    <button type="submit">Add Category</button>
+  </form>
 </body>

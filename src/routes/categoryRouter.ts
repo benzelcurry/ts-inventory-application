@@ -1,7 +1,7 @@
 import { Router, Request, Response } from "express";
 
 import { getItems } from "../controllers/itemController";
-import { getCategories } from "../controllers/categoryController";
+import { addCategory, getCategories } from "../controllers/categoryController";
 
 const categoryRouter = Router();
 
@@ -16,5 +16,16 @@ categoryRouter.get("/categories", async (req: Request, res: Response) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+// Adds a new category to the table
+categoryRouter.post("/categories", async (req: Request, res: Response) => {
+  try {
+    await addCategory(req.body.category);
+    res.status(200).json("Category Added Successfully");
+  } catch (err) {
+    console.error(err);
+    res.status(500).json("Internal Server Error");
+  }
+})
 
 export default categoryRouter;

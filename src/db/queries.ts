@@ -42,3 +42,8 @@ export async function getAllCategories(): Promise<Category[]> {
   const { rows } = await pool.query("SELECT * FROM categories");
   return rows as Category[];
 }
+
+// Add a category
+export async function createCategory(category: string): Promise<void> {
+  await pool.query("INSERT INTO categories (category) VALUES ($1)", [category]);
+}
