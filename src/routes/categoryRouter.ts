@@ -1,7 +1,11 @@
 import { Router, Request, Response } from "express";
 
 import { getItems } from "../controllers/itemController";
-import { addCategory, getCategories } from "../controllers/categoryController";
+import {
+  addCategory,
+  getCategories,
+  removeCategory,
+} from "../controllers/categoryController";
 
 const categoryRouter = Router();
 
@@ -17,6 +21,25 @@ categoryRouter.get("/categories", async (req: Request, res: Response) => {
   }
 });
 
+// Deletes a category from the table
+categoryRouter.post(
+  "/categories/delete",
+  async (req: Request, res: Response) => {
+    try {
+      // This would typically be locked behind authentication, but this is just for demonstrative purposes
+      if (req.body.password != "ADMINDELETE") {
+        res.status(400).json("Invalid Password Provided");
+      } else {
+        await removeCategory(req.body.id);
+        res.status(200).json("Category Successfully Deleted");
+      }
+    } catch (err) {
+      console.error(err);
+      res.status(500).json("Internal Server Error");
+    }
+  }
+);
+
 // Adds a new category to the table
 categoryRouter.post("/categories", async (req: Request, res: Response) => {
   try {
@@ -26,6 +49,6 @@ categoryRouter.post("/categories", async (req: Request, res: Response) => {
     console.error(err);
     res.status(500).json("Internal Server Error");
   }
-})
+});
 
 export default categoryRouter;

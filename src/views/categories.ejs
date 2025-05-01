@@ -10,7 +10,17 @@
           <% const categoryItems = items.filter(item => item.category_id === category.id) %>
           <% if (categoryItems.length === 0) { %>
             <li>No items present in category.</li>
-            
+
+            <form action="/categories/delete" method="POST">
+              <p style="font-weight: bold;">Delete Category?</p>
+
+              <input type="hidden" id="id" name="id" value="<%= category.id %>">
+
+              <label for="password">Password: </label>
+              <input type="password" name="password" id="password">
+
+              <button type="submit">Delete Category?</button>
+            </form>
           <% } else { %> 
             <% categoryItems.forEach(item => { %>
               <li><%= item.item %></li>
@@ -23,6 +33,7 @@
 
   <form action="/categories" method="POST">
     <p style="font-weight: bold;">Add a Category</p>
+
     <label for="category">Category Name: </label>
     <input type="text" name="category" id="category" required>
 

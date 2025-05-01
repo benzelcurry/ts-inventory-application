@@ -47,3 +47,8 @@ export async function getAllCategories(): Promise<Category[]> {
 export async function createCategory(category: string): Promise<void> {
   await pool.query("INSERT INTO categories (category) VALUES ($1)", [category]);
 }
+
+// Delete a category
+export async function deleteCategory(id: string): Promise<void> {
+  await pool.query("DELETE FROM categories WHERE id = ($1)", [id]);
+}
